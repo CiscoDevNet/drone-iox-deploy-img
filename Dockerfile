@@ -2,4 +2,12 @@ FROM python:alpine
 
 RUN apk update && apk add curl git
 
-RUN curl -O https://pubhub.devnetcloud.com/media/iox/docs/artifacts/ioxclient/ioxclient-v1.8.1.0/ioxclient_1.8.1.0_linux_amd64.tar.gz && tar -xzf ioxclient_1.8.1.0_linux_amd64.tar.gz && chmod +x ioxclient_1.8.1.0_linux_amd64/ioxclient && mv ioxclient_1.8.1.0_linux_amd64/ioxclient /usr/local/bin/ioxclient
+RUN pip install requests
+
+ENV FOGD=10.10.20.50 username=admin password=admin_123 appname=ciscodevnet/go-escaperoom deviceip=10.10.20.51 imageTag=latest dockerReg=registry.hub.docker.io
+
+WORKDIR /
+
+COPY deploy2FogD.py .
+COPY deploy2IOx.py .
+COPY env_config.py .
