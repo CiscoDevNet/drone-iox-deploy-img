@@ -25,14 +25,14 @@ def get_token(ip, username, password):
     return token
 
 
-def add_app(ip, token, appname, imageTag):
+def add_app(ip, token, appname, imageTag, dockerReg):
     url = "https://%s/api/v1/appmgr/localapps/upload" % ip
 
     headers = {'x-token-id': token}
     parameters = {"type": "docker",
                   "dockerImageName": appname,
                   "dockerImageTag": imageTag,
-                  "dockerRegistry": ""}
+                  "dockerRegistry": dockerReg}
 
     r = requests.post(url, headers=headers, params=parameters, verify=False)
 
@@ -222,6 +222,7 @@ username = env_config.username
 password = env_config.password
 appname = env_config.appname
 deviceip = env_config.deviceip
+dockerReg = env_config.dockerReg
 imageTag = env_config.imageTag
 if imageTag == "":
     fullappname = appname
@@ -234,7 +235,7 @@ token_id = get_token(app_mgr_ip, username, password)
 print(token_id)
 
 print("Adding app to Fog Director")
-add_app(app_mgr_ip, token_id, appname, imageTag)
+add_app(app_mgr_ip, token_id, appname, imageTag, dockerReg)
 
 print("Publishing the unpublished apps in FD")
 publish_apps(app_mgr_ip, token_id)
