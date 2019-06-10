@@ -37,14 +37,14 @@ def delete_token(ip, token):
         print(r.text)
 
 
-def add_app(ip, token, appname, imageTag):
+def add_app(ip, token, appname, imageTag, dockerRed):
     url = "https://%s/api/v1/appmgr/localapps/upload" % ip
 
     headers = {'x-token-id': token}
     parameters = {"type": "docker",
                   "dockerImageName": appname,
                   "dockerImageTag": imageTag,
-                  "dockerRegistry": ""}
+                  "dockerRegistry": dockerReg}
 
     r = requests.post(url, headers=headers, params=parameters, verify=False)
 
@@ -69,7 +69,7 @@ token_id = get_token(app_mgr_ip, username, password)
 print(token_id)
 
 print("Adding app to Fog Director")
-add_app(app_mgr_ip, token_id, appname, imageTag)
+add_app(app_mgr_ip, token_id, appname, imageTag, dockerReg)
 
 #print("Logging out of Fog Director")
 #delete_token(app_mgr_ip, token_id)
