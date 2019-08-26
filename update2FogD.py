@@ -54,7 +54,7 @@ def find_app_info(ip, token, appname):
 
         while app_list_check:
             for i in app_data:
-                if i["descriptor"]["name"] == appname:
+                if i["name"] == appname:
                     return i["localAppId"], i["version"]
             app_list_check = False
         print("Data Not Found. Are you sure the app is deployed")
