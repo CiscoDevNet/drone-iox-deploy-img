@@ -48,14 +48,14 @@ def find_app_info(ip, token, appname):
     if r.status_code == 200:
         ret_json = r.json()
         # print(ret_json)
-        app_data = ret_json.data
+        app_data = ret_json["data"]
         print(app_data)
         app_list_check = True
 
         while app_list_check:
             for i in app_data:
-                if i.descriptor.info.name == appname:
-                    return i.localAppId, i.version
+                if i["descriptor"]["name"] == appname:
+                    return i["localAppId"], i["version"]
             app_list_check = False
         print("Data Not Found. Are you sure the app is deployed")
         sys.exit(1)
