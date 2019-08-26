@@ -10,4 +10,5 @@ WORKDIR /
 
 COPY deploy2FogD.py .
 COPY deploy2IOx.py .
+COPY update2FogD.py .
 COPY env_config.py .
