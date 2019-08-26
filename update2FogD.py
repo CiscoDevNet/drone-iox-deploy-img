@@ -94,7 +94,6 @@ app_mgr_ip = env_config.app_mgr_ip
 username = env_config.username
 password = env_config.password
 appname = env_config.appname
-appversion = env_config.appversion
 imageTag = env_config.imageTag
 dockerReg = env_config.dockerReg
 
